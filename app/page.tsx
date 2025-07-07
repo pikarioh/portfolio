@@ -3,8 +3,6 @@ import WebButton from './components/webbutton';
 import LinkButton from './components/linkbutton';
 import nextConfig from '@/next.config';
 
-const config = nextConfig;
-
 export default function Home() {
   return (
     <div className="w-vw relative flex h-dvh justify-center overflow-x-hidden overflow-y-scroll bg-gradient-to-b from-gray-100 via-gray-200 via-90% to-sky-100 font-[family-name:var(--font-geist-sans)]">
@@ -17,7 +15,7 @@ export default function Home() {
           <div className="relative rounded-full shadow-xl">
             <Image
               alt="Thanathon Holm"
-              src={`${config.basePath}/thanathon.jpeg`}
+              src={`/thanathon.jpeg`}
               width={192}
               height={192}
               className="size-36 shrink rounded-full bg-gray-300 sm:size-48"
@@ -46,11 +44,7 @@ export default function Home() {
               <span className="text-xs text-gray-500">
                 Main Front-end Engineer, UI/UX Designer, and Graphic Designer
               </span>
-              <img
-                src={`${config.basePath}/preview_try.png`}
-                alt="Microchip Try Preview"
-                className="rounded-xl"
-              />
+              <img src={`/preview_try.png`} alt="Microchip Try Preview" className="rounded-xl" />
             </WebButton>
 
             <WebButton link="https://propulse.no">
@@ -59,17 +53,13 @@ export default function Home() {
                 <span className="text-xs text-gray-500">2021-2022</span>
               </div>
               <span className="text-xs text-gray-500">Web Founder and Graphic Designer</span>
-              <img
-                src={`${config.basePath}/preview_propulse.png`}
-                alt="Propulse Preview"
-                className="rounded-xl"
-              />
+              <img src={`/preview_propulse.png`} alt="Propulse Preview" className="rounded-xl" />
             </WebButton>
           </div>
         </div>
 
         <div className="sticky bottom-0 z-10 flex items-center justify-center gap-4 p-8">
-          <LinkButton link={`${config.basePath}/thanathon_resume.pdf`}>
+          <LinkButton link={`/thanathon_resume.pdf`}>
             <div className="size-6 shrink-0">
               <svg
                 id="uuid-51b60f18-28cb-4480-9f16-9089a9a83009"
