@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import WebButton from './components/webbutton';
 import LinkButton from './components/linkbutton';
+import nextConfig from '@/next.config';
+
+const config = nextConfig;
 
 export default function Home() {
   return (
@@ -12,10 +15,13 @@ export default function Home() {
 
         <div className="flex flex-col items-center justify-center gap-8 p-12 md:flex-row md:gap-12">
           <div className="relative rounded-full shadow-xl">
-            <img
+            <Image
               alt="Thanathon Holm"
-              src="/thanathon.jpeg"
+              src={`${config.basePath}/thanathon.jpeg`}
+              width={192}
+              height={192}
               className="size-36 shrink rounded-full bg-gray-300 sm:size-48"
+              priority
             />
             <div className="absolute inset-0 rounded-full shadow-[inset_2px_2px_1px_0_rgba(255,255,255,0.5),inset_-1px_-2px_2px_1px_rgba(37,171,255,0.5)] blur-[2px]" />
           </div>
@@ -40,7 +46,11 @@ export default function Home() {
               <span className="text-xs text-gray-500">
                 Main Front-end Engineer, UI/UX Designer, and Graphic Designer
               </span>
-              <img src="/preview_try.png" alt="Microchip Try Preview" className="rounded-xl" />
+              <img
+                src={`${config.basePath}/preview_try.png`}
+                alt="Microchip Try Preview"
+                className="rounded-xl"
+              />
             </WebButton>
 
             <WebButton link="https://propulse.no">
@@ -49,13 +59,17 @@ export default function Home() {
                 <span className="text-xs text-gray-500">2021-2022</span>
               </div>
               <span className="text-xs text-gray-500">Web Founder and Graphic Designer</span>
-              <img src="/preview_propulse.png" alt="Propulse Preview" className="rounded-xl" />
+              <img
+                src={`${config.basePath}/preview_propulse.png`}
+                alt="Propulse Preview"
+                className="rounded-xl"
+              />
             </WebButton>
           </div>
         </div>
 
         <div className="sticky bottom-0 z-10 flex items-center justify-center gap-4 p-8">
-          <LinkButton link="/thanathon_resume.pdf">
+          <LinkButton link={`${config.basePath}/thanathon_resume.pdf`}>
             <div className="size-6 shrink-0">
               <svg
                 id="uuid-51b60f18-28cb-4480-9f16-9089a9a83009"
