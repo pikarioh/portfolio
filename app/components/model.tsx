@@ -40,6 +40,23 @@ export function Model(props: React.ComponentProps<'group'>) {
     return () => clearInterval(interval);
   }, []);
 
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      setFrame((prev) => prev + 1);
+
+      let count = 0;
+      const interval = setInterval(() => {
+        setFrame((prev) => prev + 1);
+        count += 1;
+        if (count >= 5) {
+          clearInterval(interval);
+        }
+      }, 150);
+    }, 1500);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   const meshRefs = [
     useRef<THREE.Mesh>(null), // l1Ref
     useRef<THREE.Mesh>(null), // l2Ref
@@ -104,12 +121,12 @@ export function Model(props: React.ComponentProps<'group'>) {
       </mesh>
       <mesh
         ref={underscoreRef}
-        onClick={() => setFrame((prev) => prev + 1)}
         castShadow
         receiveShadow
         geometry={nodes.underscore.geometry}
         material={materials['Material.001']}
-        position={[3.958, -0.925, 0]}
+        // Move from -3.958 to 3.958 proportionally as frame increases (assuming max frame is 6)
+        position={[-3.958 + ((3.958 - -3.958) * Math.min(frame, 6)) / 6, -0.925, 0]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={4.55}
       >
@@ -122,66 +139,76 @@ export function Model(props: React.ComponentProps<'group'>) {
           roughness={0.5}
         />
       </mesh>
-      <mesh
-        ref={l2Ref}
-        castShadow
-        receiveShadow
-        geometry={nodes.l2.geometry}
-        material={materials['Material.001']}
-        position={[0.712, 0.22, 0]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={4.55}
-      >
-        <MeshTransmissionMaterial {...materialProps} />
-      </mesh>
-      <mesh
-        ref={l1Ref}
-        castShadow
-        receiveShadow
-        geometry={nodes.l1.geometry}
-        material={materials['Material.001']}
-        position={[-0.893, 0.22, 0]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={4.55}
-      >
-        <MeshTransmissionMaterial {...materialProps} />
-      </mesh>
-      <mesh
-        ref={eRef}
-        castShadow
-        receiveShadow
-        geometry={nodes.e.geometry}
-        material={materials['Material.001']}
-        position={[-2.491, 0.115, 0]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={4.55}
-      >
-        <MeshTransmissionMaterial {...materialProps} />
-      </mesh>
-      <mesh
-        ref={hRef}
-        castShadow
-        receiveShadow
-        geometry={nodes.h.geometry}
-        material={materials['Material.001']}
-        position={[-4.154, 0.24, 0]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={4.55}
-      >
-        <MeshTransmissionMaterial {...materialProps} />
-      </mesh>
-      <mesh
-        ref={oRef}
-        castShadow
-        receiveShadow
-        geometry={nodes.o.geometry}
-        material={materials['Material.001']}
-        position={[2.353, 0.111, 0]}
-        rotation={[Math.PI / 2, 0, 0]}
-        scale={4.55}
-      >
-        <MeshTransmissionMaterial {...materialProps} />
-      </mesh>
+      {frame > 4 && (
+        <mesh
+          ref={l2Ref}
+          castShadow
+          receiveShadow
+          geometry={nodes.l2.geometry}
+          material={materials['Material.001']}
+          position={[0.712, 0.22, 0]}
+          rotation={[Math.PI / 2, 0, 0]}
+          scale={4.55}
+        >
+          <MeshTransmissionMaterial {...materialProps} />
+        </mesh>
+      )}
+      {frame > 3 && (
+        <mesh
+          ref={l1Ref}
+          castShadow
+          receiveShadow
+          geometry={nodes.l1.geometry}
+          material={materials['Material.001']}
+          position={[-0.893, 0.22, 0]}
+          rotation={[Math.PI / 2, 0, 0]}
+          scale={4.55}
+        >
+          <MeshTransmissionMaterial {...materialProps} />
+        </mesh>
+      )}
+      {frame > 2 && (
+        <mesh
+          ref={eRef}
+          castShadow
+          receiveShadow
+          geometry={nodes.e.geometry}
+          material={materials['Material.001']}
+          position={[-2.491, 0.115, 0]}
+          rotation={[Math.PI / 2, 0, 0]}
+          scale={4.55}
+        >
+          <MeshTransmissionMaterial {...materialProps} />
+        </mesh>
+      )}
+      {frame > 1 && (
+        <mesh
+          ref={hRef}
+          castShadow
+          receiveShadow
+          geometry={nodes.h.geometry}
+          material={materials['Material.001']}
+          position={[-4.154, 0.24, 0]}
+          rotation={[Math.PI / 2, 0, 0]}
+          scale={4.55}
+        >
+          <MeshTransmissionMaterial {...materialProps} />
+        </mesh>
+      )}
+      {frame > 5 && (
+        <mesh
+          ref={oRef}
+          castShadow
+          receiveShadow
+          geometry={nodes.o.geometry}
+          material={materials['Material.001']}
+          position={[2.353, 0.111, 0]}
+          rotation={[Math.PI / 2, 0, 0]}
+          scale={4.55}
+        >
+          <MeshTransmissionMaterial {...materialProps} />
+        </mesh>
+      )}
     </group>
   );
 }

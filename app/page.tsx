@@ -1,19 +1,34 @@
+'use client';
 import Image from 'next/image';
 import WebButton from './components/webbutton';
 import LinkButton from './components/linkbutton';
 import Scene from './components/scene';
 
+import { useEffect, useState } from 'react';
+import useWebGL from './hooks/useWebGL';
+
 export default function Home() {
+  const hasWebGL = useWebGL();
+
   return (
     <div className="w-vw relative flex h-dvh overflow-x-hidden overflow-y-scroll bg-gradient-to-b from-gray-100 via-gray-200 via-90% to-sky-100 font-[family-name:var(--font-geist-sans)]">
       <div className="flex h-max w-full flex-col items-center">
         <div className="aspect-[3.2] w-full max-w-screen-lg overflow-visible sm:aspect-[2.5] md:aspect-[2]">
-          <div className="relative flex aspect-[1] w-full items-center justify-center mask-b-from-85% mask-b-to-100% text-gray-500 md:aspect-[1.5]">
-            <Scene />
-          </div>
+          {hasWebGL ? (
+            <div className="relative flex aspect-[1] w-full items-center justify-center mask-b-from-85% mask-b-to-100% text-gray-400 md:aspect-[1.5]">
+              <Scene />
+            </div>
+          ) : (
+            <div className="flex aspect-[1] w-full items-center justify-center mask-b-from-85% mask-b-to-100% md:aspect-[1.5]">
+              <h1 className="animate-fade-in text-8xl tracking-widest text-gray-600 opacity-0 [animation-delay:1000ms]">
+                hello<b className="text-sky-300">_</b>
+              </h1>
+            </div>
+          )}
         </div>
+
         <div className="flex h-max w-full max-w-screen-md flex-col">
-          <div className="static z-[1] flex flex-col items-center justify-center gap-8 p-12 md:flex-row md:gap-12">
+          <div className="animate-fade-in static z-[1] flex flex-col items-center justify-center gap-8 p-12 opacity-0 md:flex-row md:gap-12">
             <div className="relative rounded-full shadow-xl">
               <Image
                 alt="Thanathon Holm"
@@ -34,7 +49,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col items-start justify-center gap-6 p-8">
+          <div className="animate-fade-in flex flex-col items-start justify-center gap-6 p-8 opacity-0 [animation-delay:500ms]">
             <h3 className="text-xl font-bold">My Works</h3>
             <div className="flex flex-col items-stretch justify-center gap-6 sm:flex-row">
               <WebButton link="https://try.microchip.com">
@@ -59,7 +74,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="sticky bottom-0 z-10 flex items-center justify-center gap-4 p-8">
+          <div className="animate-slide-in sticky bottom-0 z-10 flex [transform:translateY(100%)] items-center justify-center gap-4 p-8 [animation-delay:1000ms]">
             <LinkButton link={`/thanathon_resume.pdf`}>
               <div className="size-6 shrink-0">
                 <svg
@@ -124,8 +139,16 @@ export default function Home() {
             </LinkButton>
           </div>
 
-          <div className="flex justify-center p-8 text-sm text-gray-700">
-            <p>Hope you have a great day!</p>
+          <div className="divite-gray-300 flex justify-center divide-x p-8 text-sm text-gray-700">
+            <span className="px-2">© 2025 Thanathon Holm</span>
+
+            <a
+              href="https://github.com/pikarioh/portfolio"
+              target="_blank"
+              className="px-2 underline"
+            >
+              Source Code
+            </a>
           </div>
         </div>
       </div>

@@ -1,14 +1,14 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_JP } from 'next/font/google';
-import './globals.css';
+import './index.css';
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: 'Thanathon Holm',
-  description: "Welcome to Thanathon's Portfolio Page",
+  title: 'Thanathon Holm - Portfolio',
+  description: "Thanathon Holm's Portfolio - Front-end Engineer & Graphic Designer",
 };
 
 export default function RootLayout({
